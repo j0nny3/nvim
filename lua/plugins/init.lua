@@ -14,9 +14,18 @@ return {
   },
 
   -- test new blink
-  -- { import = "nvchad.blink.lazyspec" },
-
-  -- {
+{
+  "zbirenbaum/copilot.lua",
+  cmd = "Copilot",
+  event = "InsertEnter",
+  config = function()
+    require("copilot").setup({
+      suggestion = { auto_trigger = true },
+      panel = { enabled = false },
+    })
+  end,
+}
+-- {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {
   -- 		ensure_installed = {

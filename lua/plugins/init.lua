@@ -13,18 +13,27 @@ return {
     end,
   },
 
-  -- test new blink
 {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   event = "InsertEnter",
   config = function()
     require("copilot").setup({
-      suggestion = { auto_trigger = true },
-      panel = { enabled = false },
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = "<C-<CR>>",
+          next = "<C-n>",
+          prev = "<C-p>",
+          dismiss = "<C-]>",
+        },
+      },
+      panel = { enabled = false }, -- keep panel disabled
     })
   end,
 }
+
 -- {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {

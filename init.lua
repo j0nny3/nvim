@@ -46,10 +46,18 @@ Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
 vim.call('plug#end')
 
 
--- Map <leader>w to save the current file
-vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
-
---
+require('telescope').setup{
+  defaults = {
+    follow = true,
+  },pickers = {
+    find_files = {
+      follow = true,   -- explicitly follow symlinks
+    },
+    live_grep = {
+      follow = true,
+    },
+  },
+}
 -- ----------------------
 -- lsp
 -- ----------------------
@@ -63,31 +71,6 @@ if cwd:match("card_battle") then
 elseif cwd:match("cardbattle_server") then
     lspconfig.gdscript.setup({ cmd = { "nc", "127.0.0.1", "6008" } })
 end
-
--- copilot
-local cmp = require("cmp")
-local copilot = require("copilot.suggestion")
-
-cmp.setup({
-  mapping = {
-    ["<Tab>"] = function(fallback)
-      if copilot.is_visible() then
-        copilot.accept()
-      elseif cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end,
-    ["<S-Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end,
-  },
-})
 
 -- write breakpoint to new line
 vim.api.nvim_create_user_command('GodotBreakpoint', function()

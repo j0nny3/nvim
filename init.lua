@@ -36,15 +36,6 @@ require "autocmds"
 vim.schedule(function()
   require "mappings"
 end)
--- ----------------------
--- vim-plug plugin-manager
--- ----------------------
-local vim = vim
-local Plug = vim.fn['plug#']
-vim.call('plug#begin')
-Plug('nvim-treesitter/nvim-treesitter', { ['do'] = ':TSUpdate' })
-vim.call('plug#end')
-
 
 require('telescope').setup{
   defaults = {

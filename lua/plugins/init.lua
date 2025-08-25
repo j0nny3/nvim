@@ -33,9 +33,9 @@ return {
       }
     end,
   },
-{
-  "nvim-java/nvim-java",
-},
+  {
+    "nvim-java/nvim-java",
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",

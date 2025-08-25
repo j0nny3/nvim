@@ -1,5 +1,4 @@
 require("nvchad.configs.lspconfig").defaults()
-
 require("java").setup()
 
 local servers = { "html", "cssls" ,"jdtls","pyright"}

@@ -8,6 +8,20 @@ vim.o.expandtab = true   -- Convert tabs to spaces
 vim.o.softtabstop = 4    -- Pressing Tab inserts 4 spaces
 vim.o.autoindent = true  -- Keep the same indent on new lines
 vim.o.smartindent = true -- Smart auto-indenting for code
+vim.wo.colorcolumn = "100"
+
+-- Force 4 spaces for specific filetypes that override it
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" }, -- all filetypes
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.expandtab = true
+    vim.wo.breakindent = true
+    vim.wo.breakindentopt = "shift:4"
+  end,
+})
 
 -- vim.opt.colorcolumn = "80"
 
@@ -61,15 +75,13 @@ require('telescope').setup{
 -- ----------------------
 -- lsp
 -- ----------------------
-local lspconfig = require('lspconfig')
-lspconfig.gdscript.setup{}
 
 local cwd = vim.fn.getcwd()
 
 if cwd:match("card_battle") then
-    lspconfig.gdscript.setup({ cmd = { "nc", "127.0.0.1", "6005" } })
+    vim.lsp.config({ cmd = { "nc", "127.0.0.1", "6005" } })
 elseif cwd:match("cardbattle_server") then
-    lspconfig.gdscript.setup({ cmd = { "nc", "127.0.0.1", "6008" } })
+    vim.lsp.config({ cmd = { "nc", "127.0.0.1", "6008" } })
 end
 
 -- write breakpoint to new line

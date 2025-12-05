@@ -16,4 +16,16 @@ map("n", "<leader>dn", function()
 end)
 map("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map("i", "<C-v>", "<C-r>+")
+map("c", "<C-v>", "<C-r>+")
+map("n", "<C-v>", "<C-r>+")
+
+-- random utility
+map({ "n" }, "<M-.>", "@:", { desc = "repeat last command" })
+--map("n", "<leader>j", ":w<CR>:!java -cp \"target/classes;target/test-classes;$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q -DincludeScope=test)\" org.junit.platform.console.ConsoleLauncher --select-class %:t:r<CR>", { desc = "run java test class" })
+
+--git bindings
+local gitsigns = require "gitsigns"
+map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "git preview hunk" })
+map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "git reset hunk" })
+map("n", "<leader>gb", gitsigns.blame_line, { desc = "git blame line" })

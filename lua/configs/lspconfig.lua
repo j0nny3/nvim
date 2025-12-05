@@ -1,8 +1,7 @@
 require("nvchad.configs.lspconfig").defaults()
-require("java").setup()
-require("lspconfig").jdtls.setup {}
-local servers = { "pyright" }
--- "html", "cssls"
+
+local servers = { "jdtls", "ts_ls", "pyright"}
+-- "html", "cssls", "java_language_server"
 vim.lsp.enable(servers)
 
 -- read :h vim.lsp.config for changing options of lsp servers

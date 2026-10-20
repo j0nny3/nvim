@@ -20,6 +20,17 @@ map("i", "<C-v>", "<C-r>+")
 map("c", "<C-v>", "<C-r>+")
 map("n", "<C-v>", "<C-r>+")
 
+if vim.g.neovide then
+    local change_scale = function(delta)
+        vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+    end
+
+    -- Zoom in / out / reset
+    map("n", "<C-+>", function() change_scale(1.25) end, { desc = "Zoom in" })
+    map("n", "<C-->", function() change_scale(1 / 1.25) end, { desc = "Zoom out" })
+    map("n", "<C-0>", function() vim.g.neovide_scale_factor = 1.0 end, { desc = "Reset zoom" })
+end
+
 -- random utility
 map({ "n" }, "<M-.>", "@:", { desc = "repeat last command" })
 --map("n", "<leader>j", ":w<CR>:!java -cp \"target/classes;target/test-classes;$(mvn dependency:build-classpath -Dmdep.outputFile=/dev/stdout -q -DincludeScope=test)\" org.junit.platform.console.ConsoleLauncher --select-class %:t:r<CR>", { desc = "run java test class" })
